@@ -1,0 +1,124 @@
+// global application styles
+a {
+    cursor: pointer;
+}
+
+.game-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 500px;
+    width: 100%;
+    flex-direction: column;
+}
+
+.start-game {
+    background-color: lightgreen;
+    height: 200px;
+    width: 200px;
+    cursor: pointer;
+}
+
+.game-timer-wrapper {
+    width: 100%;
+    height: 50px;
+}
+
+.game-box-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.health-controls-box {
+    width: 50%;
+    height: 85%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.health-box-wrapper {
+    height: 300px;
+}
+
+.action-control-box-wrapper {
+    height: 100px;
+}
+
+.logs-box-wrapper {
+    height: 300px;
+    max-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+}
+
+.log-row-wrapper {
+    width: 100%;
+    padding: 10px;
+}
+
+.health-wrapper {
+    height: 80%;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.player-health-wrapper, .monster-health-wrapper {
+    background-color: red;
+}
+
+.player-health-progress, .monster-health-progress {
+    background-color: lightgreen;
+    height: 100%;
+    transition: width linear 0.4s;
+    position: absolute;
+    left: 0px;
+}
+
+.alert-dialogue-bg {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    background-color: rgba(0,0,0,0.2);
+}
+
+.alert-dialogue {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    height: 150px;
+    width: 400px;
+}
+
+.alert-title {
+    width: 100%;
+    text-align: center;
+}
+
+.alert-inner-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.current-heath-text {
+    position: absolute;
+}

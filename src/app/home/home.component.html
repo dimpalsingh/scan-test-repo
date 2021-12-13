@@ -1,0 +1,80 @@
+﻿<div class="game-wrapper">
+    <button [disabled]="loading" class="start-game" *ngIf="!showGame && !loading" (click)="startGame()">Start Game</button>
+    <div class="game-timer-wrapper" *ngIf="showGame && !loading">
+        Time Remaining: {{gameTimerString}}
+    </div>
+    <div class="game-box-wrapper health-box-wrapper" *ngIf="showGame && !loading">
+        <div class="health-controls-box health-box">
+            <h3>You</h3>
+            <div class="player-health-wrapper health-wrapper">
+                <div class="player-health-progress" [ngStyle]="{'width': playerHealth+'%'}">
+            
+                </div>
+                <span class="current-heath-text">{{playerHealth}}%</span>
+            </div>
+        </div>
+        <div class="health-controls-box health-box">
+            <h3>Monster</h3>
+            <div class="monster-health-wrapper health-wrapper">
+                <div class="player-health-progress" [ngStyle]="{'width': monsterHealth+'%'}">
+            
+                </div>
+                <span class="current-heath-text">{{monsterHealth}}%</span>
+            </div>
+        </div>
+    </div>
+    <div class="game-box-wrapper action-control-box-wrapper" *ngIf="showGame && !loading">
+        <div class="health-controls-box action-control-box">
+            <div class="control-wrapper">
+                <button [disabled]="playerPerformingAction || isGameFinished" (click)="playerAction('attack')" class="btn btn-primary ml-3">
+                    <span class="spinner-border spinner-border-sm mr-1" *ngIf="currentPlayerAction === 1"></span>
+                    Attack
+                </button>
+                <button [disabled]="playerPerformingAction || isGameFinished || (gameConfig.max_blast_count - gameSessionObj.player_current_blast_count <= 0)" (click)="playerAction('blast')" class="btn btn-primary ml-3">
+                    <span class="spinner-border spinner-border-sm mr-1" *ngIf="currentPlayerAction === 2"></span>
+                    Blast({{gameConfig.max_blast_count - gameSessionObj.player_current_blast_count}})
+                </button>
+                <button [disabled]="playerPerformingAction || isGameFinished || (gameConfig.max_heal_count - gameSessionObj.player_current_heal_count <= 0)" (click)="playerAction('heal')" class="btn btn-primary ml-3">
+                    <span class="spinner-border spinner-border-sm mr-1" *ngIf="currentPlayerAction === 3"></span>
+                    Heal({{gameConfig.max_heal_count - gameSessionObj.player_current_heal_count}})
+                </button>
+                <button [disabled]="playerPerformingAction || isGameFinished" class="btn btn-primary ml-3" (click)="playerAction('giveUp')">
+                    <span class="spinner-border spinner-border-sm mr-1" *ngIf="currentPlayerAction === 4"></span>
+                    Give up
+                </button>
+            </div>
+        </div>
+        <div class="health-controls-box action-control-box">
+            <div class="control-wrapper">
+                <button [disabled]="monsterPerformingAction" class="btn btn-primary ml-3">
+                    <span class="spinner-border spinner-border-sm mr-1" *ngIf="currentMonsterAction === 1"></span>
+                    Attack
+                </button>
+                <button [disabled]="monsterPerformingAction || (gameConfig.max_blast_count - gameSessionObj.monster_current_blast_count <= 0)" class="btn btn-primary ml-3">
+                    <span class="spinner-border spinner-border-sm mr-1" *ngIf="currentMonsterAction === 2"></span>
+                    Blast({{gameConfig.max_blast_count - gameSessionObj.monster_current_blast_count}})
+                </button>
+                <button [disabled]="monsterPerformingAction || (gameConfig.max_heal_count - gameSessionObj.monster_current_heal_count <= 0)" class="btn btn-primary ml-3">
+                    <span class="spinner-border spinner-border-sm mr-1" *ngIf="currentMonsterAction === 3"></span>
+                    Heal({{gameConfig.max_heal_count - gameSessionObj.monster_current_heal_count}})
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="game-box-wrapper logs-box-wrapper" *ngIf="showGame && !loading">
+        <div *ngFor="let gameLog of gameLogs;" class="log-row-wrapper">
+            {{gameLog.logMessage}}
+        </div>
+    </div>
+    <div class="alert-dialogue-bg" *ngIf="gameSessionObj && isGameFinished">
+        <div class="alert-dialogue">
+            <div class="alert-inner-wrapper p-2">
+                <h4 class="alert-title">{{getResultMessage()}} Play again?</h4>
+            </div>
+            <div class="alert-inner-wrapper p-2">
+                <button (click)="restartGame()" class="btn btn-primary ml-3">Yes</button>
+                <button (click)="resetGame()" class="btn btn-secondary ml-3">No</button>
+            </div>
+        </div>
+    </div>
+</div>
